@@ -1,10 +1,7 @@
 import pandas as pd
 import yfinance as yf
 
-try:
-    from .beta import get_beta
-except ImportError:
-    from beta import get_beta
+from beta import get_beta
 def get_rf_rate(treasury_type="3m"):
     type_to_series = {
         "4wk": "DTB4WK",
@@ -53,10 +50,10 @@ def get_market_return(ticker, period="3y"):
     annualized_return = (end_price / start_price) ** (1 / elapsed_years) - 1
     return float(annualized_return)
 
-def calculate_capm(stock="AAPL", index="SPY", beta_period="5y", beta_interval="1wk", market_period="10y", treasury_type="10y"):
+def calculate_capm(stock="AAPL", index="SPY", beta_period="5y", beta_interval="1wk", market_period="10y", treasury_type="3m"):
     index_rate = get_market_return(index, market_period)
     beta = get_beta(stock, index, beta_period, beta_interval, just_beta=True)
     rf_rate = get_rf_rate(treasury_type)
     return rf_rate + beta * (index_rate - rf_rate)
 if __name__ == "__main__":
-    print(calculate_capm("AAPL", "SPY", "5y", "1wk", "10y", "10y"))
+    print(calculate_capm("AAPL", "SPY", "5y", "1wk", "10y", "3m"))
