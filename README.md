@@ -90,6 +90,3 @@ python stat_functions.py   # example CAPM expected return using FRED + Yahoo
 
 Generated artifacts are intended to live under `outputs/` (gitignored as needed): PNG charts, `cross_section.csv`, etc.
 
-## Project notes
-
-For the original step-by-step research roadmap and Week 1 checklist, see `cursor.md` in the repo.
